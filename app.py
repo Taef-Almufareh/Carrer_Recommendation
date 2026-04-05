@@ -8,22 +8,24 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 np.random.seed(42)
 
+st.title("Upload your dataset")
 
-from google.colab import files
+uploaded_file = st.file_uploader("Upload CSV or Excel file", type=["csv", "xlsx"])
 
-uploaded = files.upload()
-file_name = next(iter(uploaded.keys()))
+if uploaded_file is not None:
+    file_name = uploaded_file.name
 
-if file_name.lower().endswith(".xlsx"):
-    data = pd.read_excel(file_name, sheet_name="Data")
-elif file_name.lower().endswith(".csv"):
-    data = pd.read_csv(file_name)
-else:
-    raise ValueError("Please upload either an .xlsx or .csv file")
+    if file_name.lower().endswith(".xlsx"):
+        data = pd.read_excel(uploaded_file, sheet_name="Data")
+    elif file_name.lower().endswith(".csv"):
+        data = pd.read_csv(uploaded_file)
+    else:
+        st.error("Please upload CSV or XLSX file only")
+        st.stop()
 
-print("Loaded file:", file_name)
-print("Shape:", data.shape)
-data.head()
+    st.success(f"Loaded file: {file_name}")
+    st.write("Shape:", data.shape)
+    st.dataframe(data)
 
 data = data.drop_duplicates().dropna().reset_index(drop=True)
 
