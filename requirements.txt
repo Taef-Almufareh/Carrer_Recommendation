@@ -1,8 +1,7 @@
 streamlit
-pandas
 numpy
+pandas
 scikit-learn
-tensorflow
-matplotlib
-openpyxl
+tensorflow-cpu==2.15.0
 joblib
+openpyxl
