@@ -8,25 +8,30 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 np.random.seed(42)
 
-st.title("Upload your dataset")
+
+st.title("Dataset Viewer")
 
 uploaded_file = st.file_uploader("Upload CSV or Excel file", type=["csv", "xlsx"])
+
+data = None   # ✅ FIX: always define it first
 
 if uploaded_file is not None:
     file_name = uploaded_file.name
 
-    if file_name.lower().endswith(".xlsx"):
+    if file_name.endswith(".xlsx"):
         data = pd.read_excel(uploaded_file, sheet_name="Data")
-    elif file_name.lower().endswith(".csv"):
-        data = pd.read_csv(uploaded_file)
     else:
-        st.error("Please upload CSV or XLSX file only")
-        st.stop()
+        data = pd.read_csv(uploaded_file)
 
-    st.success(f"Loaded file: {file_name}")
+    st.success("File loaded successfully!")
+
+# ✅ Only use data if it exists
+if data is not None:
     st.write("Shape:", data.shape)
     st.dataframe(data)
-
+else:
+    st.info("Please upload a file to view data.")
+    
 data = data.drop_duplicates().dropna().reset_index(drop=True)
 
 target_col = "career"
