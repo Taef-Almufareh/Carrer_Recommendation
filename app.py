@@ -2,18 +2,11 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import tensorflow as tf
 import joblib
-
-from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import OneHotEncoder, StandardScaler, LabelEncoder
-from sklearn.pipeline import Pipeline
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.metrics.pairwise import cosine_similarity
 
+
 np.random.seed(42)
-tf.random.set_seed(42)
 
 
 from google.colab import files
