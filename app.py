@@ -1,9 +1,6 @@
 
 import streamlit as st
 import pandas as pd
-
-!pip install pandas numpy scikit-learn tensorflow openpyxl matplotlib -q
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
