@@ -32,7 +32,6 @@ if data is not None:
 else:
     st.info("Please upload a file to view data.")
     
-data = data.drop_duplicates().dropna().reset_index(drop=True)
 
 target_col = "career"
 id_col = "student_id"
